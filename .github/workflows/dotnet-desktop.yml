@@ -49,3 +49,11 @@ jobs:
 
     - name: Publish to folder
       run: msbuild ${{ env.Solution }} /p:Configuration=Release /p:DeployOnBuild=true /t:WebPublish /p:WebPublishMethod=FileSystem /p:publishUrl=${{ env.PACKAGE_PATH }} /p:PackageAsSingleFile=false
+
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: MyArtifacts
+        path: ${{ env.PACKAGE_PATH }}
+
+        
