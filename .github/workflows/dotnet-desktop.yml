@@ -29,10 +29,10 @@ jobs:
         fetch-depth: 0
 
     # Install the .NET Core workload
-    - name: Setup MSBuild path
-      uses: microsoft/setup-msbuild@v1.0.1
+    - name: Setup .NET Framework
+      uses: microsoft/setup-msbuild@v1
       with:
-        vs-version: "[16.4,16.9)"
+        msbuild-version: '16.0'
 
     # Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
     - name: Setup MSBuild.exe
