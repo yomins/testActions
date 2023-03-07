@@ -31,28 +31,23 @@ jobs:
 
     # Install the .NET Core workload
     - name: Setup .NET Framework
-      uses: microsoft/setup-msbuild@v1
+      uses: actions/setup-dotnet@v1
       with:
-        msbuild-version: '16.0'
+        dotnet-version: '5.0.x'
+        include-prerelease: true
 
     # Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
-    - name: Setup MSBuild.exe
-      uses: microsoft/setup-msbuild@v1.0.2
-
-    - name: Setup NuGet
-      uses: NuGet/setup-nuget@v1.0.5
-    
     - name: Restore NuGet packages
-      run: nuget restore ${{ env.Solution }}
+      run: dotnet restore ${{ env.Solution }} --framework net48
 
     - name: Build
-      run: dotnet build ${{ env.Solution }} --configuration Release
+      run: dotnet build ${{ env.Solution }} --configuration Release --framework net48
 
     - name: Publish to folder
-      run: dotnet publish ${{ env.Solution }} --configuration Release --output ${{ env.PACKAGE_PATH }}
+      run: dotnet publish ${{ env.Solution }} --configuration Release --framework net48 --output ${{ env.PACKAGE_PATH }}
 
     - name: Create NuGet package
-      run: dotnet pack --configuration Release --output ${{ env.PACKAGE_PATH }}
+      run: dotnet pack ${{ env.Solution }} --configuration Release --framework net48 --output ${{ env.PACKAGE_PATH }}
 
     - name: Upload Artifacts
       uses: actions/upload-artifact@v2
