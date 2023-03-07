@@ -57,7 +57,7 @@ jobs:
     needs: [Build]
     steps:
       - name: Create actions release
-        uses: actions/create-release@v1.2.0
+        uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
         with:
@@ -67,12 +67,6 @@ jobs:
             This is the my first release!!
           draft: false
           prerelease: false
-        permissions:
-          contents: write
-          packages: write
-          pull-requests: write
-          issues: write
-          deployments: write
 
 
   analyze:
