@@ -60,8 +60,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
         with:
-          tag_name: v0.1.0
-          release_name: Release v0.1.0
+          tag_name: v0.1.1
+          release_name: Release v0.1.1
           body: |
             This is the my first release!!
           draft: false
@@ -76,7 +76,7 @@ jobs:
       actions: read
       contents: read
       security-events: write
-      
+
     strategy:
       fail-fast: false
       matrix:
