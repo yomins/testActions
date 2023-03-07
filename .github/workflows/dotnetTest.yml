@@ -19,8 +19,9 @@ jobs:
                              # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
 
     env:
-      Solution: testActions.sln                  # Replace with your solution name, i.e. MyWpfApp.sln.
-      PACKAGE_PATH: 'published'                 # Replace with the path to your test project, i.e. MyWpfApp.Tests\MyWpfApp.Tests.csproj.
+      Solution: testActions.sln                   # Replace with your solution name, i.e. MyWpfApp.sln.
+      PACKAGE_PATH: 'published'                   # Replace with the path to your test project, i.e. MyWpfApp.Tests\MyWpfApp.Tests.csproj.
+
 
     steps:
     - name: Checkout
@@ -49,6 +50,9 @@ jobs:
 
     - name: Publish to folder
       run: msbuild ${{ env.Solution }} /p:Configuration=Release /p:DeployOnBuild=true /t:WebPublish /p:WebPublishMethod=FileSystem /p:publishUrl=${{ env.PACKAGE_PATH }} /p:PackageAsSingleFile=false
+
+    - name: Create NuGet package
+      run: dotnet pack --configuration Release --output ${{ env.PACKAGE_PATH }}
 
     - name: Upload Artifacts
       uses: actions/upload-artifact@v2
