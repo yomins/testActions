@@ -66,6 +66,11 @@ jobs:
             This is the my first release!!
           draft: false
           prerelease: false
+      - uses: actions/upload-artifact@v3
+        with:
+          name: MyArtifacts
+          path: ${{ env.PACKAGE_PATH }}
+
 
 
   analyze:
