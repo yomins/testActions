@@ -12,7 +12,6 @@ on:
 
 jobs:
 
-
   Build:
     runs-on: windows-latest  
     steps:
@@ -22,7 +21,6 @@ jobs:
         fetch-depth: 0
 
     # Install the .NET Core workload
-
 
     - name: Setup .NET Framework
       uses: microsoft/setup-msbuild@v1
@@ -52,6 +50,7 @@ jobs:
         path: ${{ env.PACKAGE_PATH }}
 
   Release:
+    permissions: write-all
     name: Release
     runs-on: windows-latest  
     needs: [Build]
