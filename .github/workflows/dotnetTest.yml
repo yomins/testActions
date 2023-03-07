@@ -1,14 +1,14 @@
 name: .NET Pipeline
 
+env:
+  Solution: testActions.sln                  # Replace with your solution name, i.e. MyWpfApp.sln.
+  PACKAGE_PATH: 'published' 
+
 on:
   push:
     branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
-
-env:
-  Solution: testActions.sln                  # Replace with your solution name, i.e. MyWpfApp.sln.
-  PACKAGE_PATH: 'published' 
 
 jobs:
 
