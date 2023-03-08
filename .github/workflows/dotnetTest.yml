@@ -76,3 +76,5 @@ jobs:
     uses: yomins/workflow-templates/.github/workflows/analyse.yml@main
     with:
       language: javascript
+
+    
