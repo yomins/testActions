@@ -73,6 +73,6 @@ jobs:
 
 
   analyze:
-    uses: yomins/workflow-templates/blob/main/.github/workflows/analyse.yml@main
+    uses: yomins/workflow-templates/.github/workflows/analyse.yml@main
     with:
       language: javascript
