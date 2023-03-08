@@ -49,50 +49,10 @@ jobs:
         name: MyArtifacts
         path: ${{ env.PACKAGE_PATH }}
 
-    - uses: thedoctor0/zip-release@0.7.1
-      with:
-        filename: site.zip
-
-  Release:
-    permissions: write-all
-    name: Release
-    runs-on: windows-latest  
-    needs: [Build]
-    steps:
-      - name: Create actions release
-        id: create-release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
-        with:
-          tag_name: v0.1.7
-          release_name: Release v0.1.7
-          body: |
-            This is the my release!!
-          draft: false
-          prerelease: false
-    # - uses: actions/upload-artifact@v3
-    #   with:
-    #     name: MyArtifacts
-    #     path: ${{ env.PACKAGE_PATH }}
-      - name: Upload Release 
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create-release.outputs.upload_url }}
-          asset_path: ./site.zip
-          asset_name: site.zip
-          asset_content_type: application/zip
-  
-
-
-
-
   analyze:
     name: Analyze
     runs-on: ubuntu-latest
-    needs: [Build, Release]
+    needs: [Build]
     permissions:
       actions: read
       contents: read
@@ -111,3 +71,27 @@ jobs:
       uses: github/codeql-action/analyze@v2
       with:
         category: "/language:javascript"
+
+  Release:
+    permissions: write-all
+    name: Release
+    runs-on: windows-latest  
+    needs: [Build, Release]
+    steps:
+      - name: Create actions release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        with:
+          tag_name: v0.1.5
+          release_name: Release v0.1.5
+          body: |
+            This is the my release!!
+          draft: false
+          prerelease: false
+      - uses: actions/upload-artifact@v3
+        with:
+          name: MyArtifacts
+          path: ${{ env.PACKAGE_PATH }}
+
+
