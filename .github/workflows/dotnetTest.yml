@@ -62,7 +62,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        language: [ 'javascript' , 'cs']
+        language: [ 'javascript' , 'csharp']
 
     steps:
     - name: Checkout repository
