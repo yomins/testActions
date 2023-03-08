@@ -58,7 +58,6 @@ jobs:
       contents: read
       security-events: write
 
-
     strategy:
       fail-fast: false
       matrix:
@@ -68,13 +67,22 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
+    - name: Setup MSBuild.exe
+      uses: microsoft/setup-msbuild@v1.0.2
+
+    - name: Setup NuGet
+      uses: NuGet/setup-nuget@v1.0.5
+    
+    - name: Restore NuGet packages
+      run: nuget restore ${{ env.Solution }}
+
+    - name: Build
+      run: msbuild ${{ env.Solution }} /p:Configuration=Release
+
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v2
       with:
         languages: ${{ matrix.language }}
-
-    - name: Autobuild
-      uses: github/codeql-action/autobuild@v2
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
