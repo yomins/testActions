@@ -58,6 +58,12 @@ jobs:
       contents: read
       security-events: write
 
+
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [ 'javascript' , 'C#']
+
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
@@ -65,12 +71,13 @@ jobs:
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v2
       with:
-        languages: javascript
+        languages: ${{ matrix.language }}
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
       with:
-        category: "/language:javascript"
+        category: "/language:${{matrix.language}}"
+
 
   Release:
     permissions: write-all
