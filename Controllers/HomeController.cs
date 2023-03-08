@@ -1,30 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿//using System.Linq;
 
-namespace testActions.Controllers
+namespace MyApplication.Controllers
 {
-    public class HomeController : Controller
-    {
-        public ActionResult Index()
-        {
-            return View();
-        }
+	public partial class HomeController : Infrastructure.BaseController
+	{
+		public HomeController() : base()
+		{
+		}
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
-    }
+		[System.Web.Mvc.HttpGet]
+		public virtual System.Web.Mvc.ViewResult Index()
+		{
+			return View();
+		}
+	}
 }
