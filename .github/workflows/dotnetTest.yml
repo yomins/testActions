@@ -71,6 +71,10 @@ jobs:
           name: MyArtifacts
           path: ${{ env.PACKAGE_PATH }}
 
+      - uses: thedoctor0/zip-release@0.7.1
+        with:
+          filename: site.zip
+
 
   analyze:
     name: Analyze
