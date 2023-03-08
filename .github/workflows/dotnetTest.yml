@@ -76,7 +76,7 @@ jobs:
     permissions: write-all
     name: Release
     runs-on: windows-latest  
-    needs: [Build, Release]
+    needs: [Build, analyze]
     steps:
       - name: Create actions release
         uses: actions/create-release@v1
