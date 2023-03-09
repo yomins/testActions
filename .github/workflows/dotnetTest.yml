@@ -58,7 +58,6 @@ jobs:
       contents: read
       security-events: write
 
-
     strategy:
       fail-fast: false
       matrix:
@@ -68,30 +67,19 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
-    - name: Setup MSBuild.exe
-      uses: microsoft/setup-msbuild@v1.0.2
-
-    - name: Setup NuGet
-      uses: NuGet/setup-nuget@v1.0.5
-    
-    - name: Restore NuGet packages
-      run: nuget restore ${{ env.Solution }}
-
-    - name: Build
-      run: |
-        dotnet build /p:UseSharedCompilation=false
-        msbuild ${{ env.Solution }} /p:Configuration=Release
-
+    # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v2
       with:
         languages: ${{ matrix.language }}
 
+    - name: Autobuild
+      uses: github/codeql-action/autobuild@v2
+
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
       with:
-        category: "/language:javascript, /language:csharp"
-        no-trap-cache: true
+        category: "/language:${{matrix.language}}"
 
 
   Release:
@@ -105,8 +93,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
         with:
-          tag_name: v0.1.8
-          release_name: Release v0.1.8
+          tag_name: v0.2.0
+          release_name: Release v0.2.0
           body: |
             This is the my release!!
           draft: false
