@@ -78,18 +78,19 @@ jobs:
       run: nuget restore ${{ env.Solution }}
 
     - name: Build
-      run: msbuild ${{ env.Solution }} /p:Configuration=Release
+      run: |
+        dotnet build /p:UseSharedCompilation=false
+        msbuild ${{ env.Solution }} /p:Configuration=Release
 
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v2
       with:
-        debug: true
         languages: ${{ matrix.language }}
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
       with:
-        category: "/language:${{matrix.language}}"
+        category: "/language:javascript, /language:csharp"
 
 
   Release:
