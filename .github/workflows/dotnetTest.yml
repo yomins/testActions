@@ -38,9 +38,7 @@ jobs:
       run: nuget restore ${{ env.Solution }}
 
     - name: Build
-      run: |  
-            dotnet build /p:UseSharedCompilation=false
-            msbuild ${{ env.Solution }} /p:Configuration=Release
+      run: msbuild ${{ env.Solution }} /p:Configuration=Release
 
     - name: Publish to folder
       run: msbuild ${{ env.Solution }} /p:Configuration=Release /p:DeployOnBuild=true /t:WebPublish /p:WebPublishMethod=FileSystem /p:publishUrl=${{ env.PACKAGE_PATH }} /p:PackageAsSingleFile=false
