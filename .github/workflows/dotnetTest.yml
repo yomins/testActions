@@ -91,6 +91,7 @@ jobs:
       uses: github/codeql-action/analyze@v2
       with:
         category: "/language:javascript, /language:csharp"
+        no-trap-cache: true
 
 
   Release:
