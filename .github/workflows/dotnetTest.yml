@@ -49,10 +49,10 @@ jobs:
         name: MyArtifacts
         path: ${{ env.PACKAGE_PATH }}
 
-  analyze-reusable:
-    name: Analyze (reusable workflow)
-    uses: yomins/workflow-templates/.github/workflows/analyze.yml@main
-    needs: [Build]
+    - name: Analyze code
+      uses: yomins/workflow-templates/.github/workflows/analyse.yml@main
+      with:
+        languages: "[ 'javascript']"
 
 
   Release:
