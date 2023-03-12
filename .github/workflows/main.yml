@@ -1,0 +1,13 @@
+name: Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  analyze-code:
+    name: Analyze Code
+    uses: yomins/workflow-templates/.github/workflows/analyse.yml@main
+    with:
+      languages: "['javascript', 'chsarp']"
