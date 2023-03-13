@@ -12,7 +12,7 @@ on:
 
 jobs:
 
-  analyze-code:
+  analyze:
     name: Analyze Code
     uses: yomins/workflow-templates/.github/workflows/analyse.yml@main
     with:
