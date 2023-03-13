@@ -12,6 +12,12 @@ on:
 
 jobs:
 
+  analyze-code:
+    name: Analyze Code
+    uses: yomins/workflow-templates/.github/workflows/analyse.yml@main
+    with:
+      languages: "['javascript', 'chsarp']"
+
   Build:
     runs-on: windows-latest  
     steps:
@@ -48,13 +54,6 @@ jobs:
       with:
         name: MyArtifacts
         path: ${{ env.PACKAGE_PATH }}
-
-    - name: Analyze code
-      uses: yomins/workflow-templates/.github/workflows/analyse.yml@main
-      with:
-        languages: "['javascript', 'chsarp']"
-
-
 
   Release:
     permissions: write-all
